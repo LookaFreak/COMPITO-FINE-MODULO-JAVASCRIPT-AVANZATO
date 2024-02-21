@@ -52,17 +52,19 @@ function filterProductsBySection(section, data) {
     const filteredProducts = data.filter(product => {
         const brand = product.brand.toLowerCase();
         if (section === "SmartPhone") {
-            return (brand === "apple" || brand === "Samsung" || brand === "redmagic" ) ;
+            // Modificare questa parte della logica per includere tutti gli smartphone
+            return brand.toLowerCase().includes("samsung") || brand.toLowerCase().includes("apple") || brand.toLowerCase().includes("redmagic");
         } else if (section === "TV") {
-            return (brand === "xiaomi" || brand === "sharp europe");
+            return brand.toLowerCase().includes("xiaomi") || brand.toLowerCase().includes("sharp europe");
         } else if (section === "Elettrodomestici") {
-            return (brand === "dyson" || brand === "rowenta");
+            return brand.toLowerCase().includes("dyson") || brand.toLowerCase().includes("rowenta");
         }
     });
 
     // Mostra i prodotti filtrati
     showProducts(filteredProducts);
 }
+
 // Funzione per mostrare i prodotti
 function showProducts(products) {
     const productList = document.getElementById('productList');
