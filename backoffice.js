@@ -1,9 +1,8 @@
-// backoffice.js
+
 const productList = document.getElementById('productList');
 const addProductBtn = document.getElementById('addProductBtn');
 
-// Function to fetch and display products
-// Function to fetch and display products
+
 function fetchProducts() {
     fetch('https://striveschool-api.herokuapp.com/api/product/', {
         headers: {
@@ -64,12 +63,12 @@ addProductBtn.addEventListener('click', () => {
     .catch(error => console.error('Error adding product:', error));
 });
 
-// Function to edit a product
+// Funzione per modificare un prodotto
 function editProduct(productId) {
-    // Implement edit functionality
+    
 }
 
-// Function to delete a product
+// Funzione per cancellare un prodotto      
 function deleteProduct(productId) {
     fetch(`https://striveschool-api.herokuapp.com/api/product/${productId}`, {
         method: 'DELETE',
@@ -87,7 +86,7 @@ function deleteProduct(productId) {
     .catch(error => console.error('Error deleting product:', error));
 }
 
-// Function to edit a product
+// Function per modificare il prodotto 
 function editProduct(productId) {
     const newName = prompt("Enter new name for the product:");
     const newDescription = prompt("Enter new description for the product:");
