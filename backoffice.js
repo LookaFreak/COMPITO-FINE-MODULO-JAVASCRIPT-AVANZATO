@@ -147,3 +147,42 @@ function saveProductChanges(productId) {
     })
     .catch(error => console.error('Error updating product:', error));
 }
+// Function to save product changes
+function saveProductChanges(productId) {
+    const editedProduct = {
+        name: document.getElementById(`editName_${productId}`).value,
+        description: document.getElementById(`editDescription_${productId}`).value,
+        brand: document.getElementById(`editBrand_${productId}`).value,
+        imageUrl: document.getElementById(`editImageUrl_${productId}`).value,
+        price: parseFloat(document.getElementById(`editPrice_${productId}`).value)
+    };
+
+    // Verifica se uno o più campi sono vuoti
+    if (
+        editedProduct.name.trim() === '' ||
+        editedProduct.description.trim() === '' ||
+        editedProduct.brand.trim() === '' ||
+        editedProduct.imageUrl.trim() === '' ||
+        isNaN(editedProduct.price) || editedProduct.price <= 0
+    ) {
+        alert('Sicuro che hai compilato bene il form?');
+        return; // Esce dalla funzione se uno o più campi non sono valorizzati correttamente
+    }
+
+    fetch(`https://striveschool-api.herokuapp.com/api/product/${productId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQzOWNmODI0ZjYwNTAwMTkzN2Q0YjEiLCJpYXQiOjE3MDgzNzMyMTksImV4cCI6MTcwOTU4MjgxOX0.U6GAT7yA7q6-HubdnithUMPIKZuXR0X1FKJRFRV9wQw'
+        },
+        body: JSON.stringify(editedProduct)
+    })
+    .then(response => {
+        if (response.ok) {
+            fetchProducts();
+        } else {
+            throw new Error('Failed to update product');
+        }
+    })
+    .catch(error => console.error('Error updating product:', error));
+}
